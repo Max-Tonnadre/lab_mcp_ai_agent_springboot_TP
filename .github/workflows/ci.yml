@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Grant execute permission for Maven wrapper
+        # On cible le fichier mvnw à l'intérieur du sous-dossier
+        run: chmod +x ./mvnw
+        working-directory: ./agent/agent
+
+      - name: Build & Test with Maven
+        # La commande sera lancée depuis le dossier contenant le pom.xml
+        run: ./mvnw clean test
+        working-directory: ./agent/agent
