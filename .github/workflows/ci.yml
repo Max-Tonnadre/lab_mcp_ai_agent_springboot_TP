@@ -24,4 +24,4 @@ jobs:
         # On utilise le wrapper Maven (mvnw) qui est standard dans les projets Spring Boot
         # 'clean test' exécute vos tests unitaires
         run: ./mvnw clean test
-        working-directory: ./agent
+        working-directory: ./agent/agent
