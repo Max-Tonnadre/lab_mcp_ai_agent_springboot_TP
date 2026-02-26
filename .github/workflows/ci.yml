@@ -23,9 +23,7 @@ jobs:
       - name: Grant execute permission for Maven wrapper
         # On cible le fichier mvnw à l'intérieur du sous-dossier
         run: chmod +x ./mvnw
-        working-directory: ./agent/agent
 
       - name: Build & Test with Maven
         # La commande sera lancée depuis le dossier contenant le pom.xml
         run: ./mvnw clean test
-        working-directory: ./agent/agent
