@@ -20,6 +20,11 @@ jobs:
           # On change le cache pour Maven
           cache: maven
 
+      - name: Grant execute permission for Maven wrapper
+          # Indispensable pour éviter l'erreur "Permission denied" (126)
+        run: chmod +x mvnw
+
+
       - name: Build & Test with Maven
         # On utilise le wrapper Maven (mvnw) qui est standard dans les projets Spring Boot
         # 'clean test' exécute vos tests unitaires
