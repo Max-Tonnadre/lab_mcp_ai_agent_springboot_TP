@@ -24,7 +24,10 @@
             distribution: temurin
             java-version: "21"
             cache: maven
-
+            
+        - name: Grant execute permission for Maven wrapper
+          # On cible le fichier mvnw à l'intérieur du sous-dossier
+          run: chmod +x ./mvnw
         - name: Build & Test
           run: ./mvnw clean test
 
