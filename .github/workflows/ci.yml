@@ -10,23 +10,22 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
-          # On change le cache pour Maven
           cache: maven
 
       - name: Grant execute permission for Maven wrapper
-          # Indispensable pour éviter l'erreur "Permission denied" (126)
-        run: chmod +x mvnw
-
+        # On cible le fichier mvnw à l'intérieur du sous-dossier
+        run: chmod +x ./mvnw
+        working-directory: ./agent/agent
 
       - name: Build & Test with Maven
-        # On utilise le wrapper Maven (mvnw) qui est standard dans les projets Spring Boot
-        # 'clean test' exécute vos tests unitaires
+        # La commande sera lancée depuis le dossier contenant le pom.xml
         run: ./mvnw clean test
         working-directory: ./agent/agent
