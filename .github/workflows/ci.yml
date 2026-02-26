@@ -27,3 +27,6 @@ jobs:
       - name: Build & Test with Maven
         # La commande sera lancée depuis le dossier contenant le pom.xml
         run: ./mvnw clean test
+
+      - name: Docker Build (no push)
+        run: docker build -t local/agent:ci .
